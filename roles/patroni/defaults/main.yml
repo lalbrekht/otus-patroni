@@ -1,0 +1,3 @@
+---
+# defaults file for roles/patroni
+patroni_scope_name: otus

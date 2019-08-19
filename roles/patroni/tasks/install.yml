@@ -1,0 +1,43 @@
+---
+- name: Patroni | install | Install patroni requiered packages
+  yum:
+    name:
+      - gcc 
+      - python-devel 
+      - epel-release
+      - https://yum.postgresql.org/11/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    state: present
+
+- name: Patroni | install | Install python2-pip
+  yum:
+    name:
+      - python2-pip
+    state: present
+
+- name: Patroni | install | Install postgresl-11 repo
+  yum:
+    name: postgresql11-server
+    state: present
+
+- name: Patroni | install | Upgrade pip
+  pip: 
+    name: pip
+    state: forcereinstall
+
+- name: Patroni | install | Install pip packages
+  pip:
+    name:
+      - python-etcd
+      - python-consul
+      - psycopg2==2.7
+      - setuptools
+    state: latest
+  tags:
+    - pip
+
+- name: Patroni | install | Install patroni
+  pip:
+    name: patroni
+    state: present
+  tags:
+    - pip-patroni
