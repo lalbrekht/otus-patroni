@@ -1,0 +1,13 @@
+---
+# tasks file for roles/probackup
+- name: Install pg_probackup
+  include: 'install.yml'
+
+- name: Configure users
+  include: 'user.yml'
+
+- name: Configure remote backups
+  include: 'configure.yml'
+  when: remote_backup
+  tags:
+    - remote 

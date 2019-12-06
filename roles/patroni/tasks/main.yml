@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/patroni
-- name: Patroni | main | Include common tasks
-  include: common.yml
+#- name: Patroni | main | Include common tasks
+#  include: common.yml
 
 - name: Patroni | main | Include install tasks
   include: install.yml

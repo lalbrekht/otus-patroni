@@ -1,0 +1,4 @@
+{% for host in groups['db'] %}
+{{ hostvars[host]['ansible_host'] }}:5432:postgres:{{ backup_user }}:pos5432gres!
+{% endfor %}
+

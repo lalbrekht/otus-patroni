@@ -1,23 +1,10 @@
 ---
 # Prepare host
 - name: Consul | Install required packages
-  yum:
-    name:
-      - wget
-      - zip
-      - unzip
-      - git
+  apt:
+    name: zip
     state: present
-
-- name: Consul | Turn off SELinux
-  selinux:
-    state: disabled
-
-- name: Consul | Turn off Firewalld
-  systemd:
-    name: firewalld
-    state: stopped
-    enabled: False
+    update_cache: True
 
 # Install consul
 - include: install.yml

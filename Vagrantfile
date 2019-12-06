@@ -3,17 +3,25 @@
 
 MACHINES = {
   :consul => {
-        :box_name => "centos/7",
+        :box_name => "ubuntu/bionic64",
         :ip_addr => '192.168.11.100'
   },
   :pg1 => {
-        :box_name => "centos/7",
+        :box_name => "ubuntu/bionic64",
         :ip_addr => '192.168.11.120'
   },
   :pg2 => {
-        :box_name => "centos/7",
+        :box_name => "ubuntu/bionic64",
         :ip_addr => '192.168.11.121'
-  }
+  },
+  :backup1 => {
+        :box_name => "ubuntu/bionic64",
+        :ip_addr => '192.168.11.200'
+  },
+  :backup2 => {
+        :box_name => "ubuntu/bionic64",
+        :ip_addr => '192.168.11.201'
+  },
 }
 
 Vagrant.configure("2") do |config|
@@ -30,7 +38,7 @@ Vagrant.configure("2") do |config|
           box.vm.network "private_network", ip: boxconfig[:ip_addr]
 
           box.vm.provider :virtualbox do |vb|
-            vb.customize ["modifyvm", :id, "--memory", "200"]
+            vb.customize ["modifyvm", :id, "--memory", "512"]
             # Подключаем дополнительные диски
             #vb.customize ['createhd', '--filename', second_disk, '--format', 'VDI', '--size', 5 * 1024]
             #vb.customize ['storageattach', :id, '--storagectl', 'IDE', '--port', 0, '--device', 1, '--type', 'hdd', '--medium', second_disk]
@@ -40,10 +48,10 @@ Vagrant.configure("2") do |config|
             mkdir -p ~root/.ssh; cp ~vagrant/.ssh/auth* ~root/.ssh
             sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
             systemctl restart sshd
-            yum install -y \
-						vim \
-						telnet \
-						bind-utils
+            apt update -y && apt install -y \
+            vim \
+            python \
+		telnet
           SHELL
 =begin
           box.vm.provision "ansible" do |ansible|

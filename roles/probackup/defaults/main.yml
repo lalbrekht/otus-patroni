@@ -1,0 +1,16 @@
+---
+# defaults file for roles/probackup
+
+pg_probackup_repo_key: http://repo.postgrespro.ru/pg_probackup/keys/GPG-KEY-PG_PROBACKUP
+
+pg_probackup_repo: deb [arch=amd64] http://repo.postgrespro.ru/pg_probackup/deb/ {{ ansible_distribution_release }} main-{{ ansible_distribution_release }}
+
+pg_probackup_package: pg-probackup-11
+
+backup_user: dbbackup
+
+backup_folder: /var/backup/
+
+backup_scope: test
+
+remote_backup: true
