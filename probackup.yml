@@ -1,9 +1,0 @@
----
-- name: Probackup install and configure role
-  hosts: db, backup
-  gather_facts: True
-  become_user: root
-  become: True
-
-  roles:
-    - probackup
