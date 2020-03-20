@@ -16,3 +16,13 @@
 
   roles:
     - patroni
+
+- name: Install and configure HAProxy
+  hosts: proxy
+  gather_facts: True
+  become_user: root
+  become: True
+  roles:
+    - haproxy
+  tags:
+    - haproxy

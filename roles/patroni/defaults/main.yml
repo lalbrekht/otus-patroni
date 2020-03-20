@@ -7,6 +7,7 @@ apt_packages:
   - python-dev 
   - postgresql-server-dev-all
   - python-pip
+  - python3-pip
   - python-apt
 
 pip_packages:

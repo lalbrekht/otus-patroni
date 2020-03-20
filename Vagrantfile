@@ -6,6 +6,10 @@ MACHINES = {
         :box_name => "ubuntu/bionic64",
         :ip_addr => '192.168.11.100'
   },
+  :app => {
+        :box_name => "ubuntu/bionic64",
+        :ip_addr => '192.168.11.50'
+  },
   :pg1 => {
         :box_name => "ubuntu/bionic64",
         :ip_addr => '192.168.11.120'
@@ -14,14 +18,10 @@ MACHINES = {
         :box_name => "ubuntu/bionic64",
         :ip_addr => '192.168.11.121'
   },
-  :backup1 => {
+  :haproxy => {
         :box_name => "ubuntu/bionic64",
-        :ip_addr => '192.168.11.200'
-  },
-  :backup2 => {
-        :box_name => "ubuntu/bionic64",
-        :ip_addr => '192.168.11.201'
-  },
+        :ip_addr => '192.168.11.101'
+  }
 }
 
 Vagrant.configure("2") do |config|
@@ -44,15 +44,15 @@ Vagrant.configure("2") do |config|
             #vb.customize ['storageattach', :id, '--storagectl', 'IDE', '--port', 0, '--device', 1, '--type', 'hdd', '--medium', second_disk]
           end
 
-          box.vm.provision "shell", inline: <<-SHELL
-            mkdir -p ~root/.ssh; cp ~vagrant/.ssh/auth* ~root/.ssh
-            sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-            systemctl restart sshd
-            apt update -y && apt install -y \
-            vim \
-            python \
-		telnet
-          SHELL
+      #     box.vm.provision "shell", inline: <<-SHELL
+      #       mkdir -p ~root/.ssh; cp ~vagrant/.ssh/auth* ~root/.ssh
+      #       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+      #       systemctl restart sshd
+      #       apt update -y && apt install -y \
+      #       vim \
+      #       python \
+	# 	telnet
+      #     SHELL
 =begin
           box.vm.provision "ansible" do |ansible|
             ansible.verbose = "vv"
