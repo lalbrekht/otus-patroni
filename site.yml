@@ -4,8 +4,9 @@
   gather_facts: True
   become_user: root
   become: True
-
   roles:
+    - consul
+  tags:
     - consul
 
 - name: Patroni install and configure role
@@ -13,8 +14,9 @@
   gather_facts: True
   become_user: root
   become: True
-
   roles:
+    - patroni
+  tags:
     - patroni
 
 - name: Install and configure HAProxy
